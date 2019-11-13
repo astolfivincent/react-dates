@@ -21,7 +21,7 @@ const TestPrevIcon = () => (
       top: '20px',
       width: '40px',
     }}
-    tabindex="0"
+    tabIndex="0"
   >
     Prev
   </div>
@@ -39,7 +39,7 @@ const TestNextIcon = () => (
       top: '20px',
       width: '40px',
     }}
-    tabindex="0"
+    tabIndex="0"
   >
     Next
   </div>
@@ -56,6 +56,54 @@ const TestCustomInfoPanel = () => (
     &#x2755; Some useful info here
   </div>
 );
+
+function renderNavPrevButton(buttonProps) {
+  const {
+    ariaDisabled,
+    ariaLabel,
+    onClick,
+    onKeyUp,
+    onMouseUp,
+  } = buttonProps;
+
+  return (
+    <button
+      aria-label={ariaLabel}
+      disabled={ariaDisabled}
+      onClick={onClick}
+      onKeyUp={onKeyUp}
+      onMouseUp={onMouseUp}
+      style={{ position: 'absolute', top: 23, left: 22 }}
+      type="button"
+    >
+    &lsaquo; Prev
+    </button>
+  );
+}
+
+function renderNavNextButton(buttonProps) {
+  const {
+    ariaDisabled,
+    ariaLabel,
+    onClick,
+    onKeyUp,
+    onMouseUp,
+  } = buttonProps;
+
+  return (
+    <button
+      aria-label={ariaLabel}
+      disabled={ariaDisabled}
+      onClick={onClick}
+      onKeyUp={onKeyUp}
+      onMouseUp={onMouseUp}
+      style={{ position: 'absolute', top: 23, right: 22 }}
+      type="button"
+    >
+          Next &rsaquo;
+    </button>
+  );
+}
 
 storiesOf('DayPicker', module)
   .add('default', withInfo()(() => (
@@ -131,6 +179,12 @@ storiesOf('DayPicker', module)
     <DayPicker
       navPrev={<TestPrevIcon />}
       navNext={<TestNextIcon />}
+    />
+  )))
+  .add('with custom navigation buttons', withInfo()(() => (
+    <DayPicker
+      renderNavPrevButton={renderNavPrevButton}
+      renderNavNextButton={renderNavNextButton}
     />
   )))
   .add('with custom details', withInfo()(() => (

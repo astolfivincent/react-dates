@@ -109,6 +109,54 @@ const TestCustomInfoPanel = () => (
   </div>
 );
 
+function renderNavPrevButton(buttonProps) {
+  const {
+    ariaDisabled,
+    ariaLabel,
+    onClick,
+    onKeyUp,
+    onMouseUp,
+  } = buttonProps;
+
+  return (
+    <button
+      aria-label={ariaLabel}
+      disabled={ariaDisabled}
+      onClick={onClick}
+      onKeyUp={onKeyUp}
+      onMouseUp={onMouseUp}
+      style={{ position: 'absolute', top: 23, left: 22 }}
+      type="button"
+    >
+      &lsaquo; Prev
+    </button>
+  );
+}
+
+function renderNavNextButton(buttonProps) {
+  const {
+    ariaDisabled,
+    ariaLabel,
+    onClick,
+    onKeyUp,
+    onMouseUp,
+  } = buttonProps;
+
+  return (
+    <button
+      aria-label={ariaLabel}
+      disabled={ariaDisabled}
+      onClick={onClick}
+      onKeyUp={onKeyUp}
+      onMouseUp={onMouseUp}
+      style={{ position: 'absolute', top: 23, right: 22 }}
+      type="button"
+    >
+      Next &rsaquo;
+    </button>
+  );
+}
+
 function renderKeyboardShortcutsButton(buttonProps) {
   const { ref, onClick, ariaLabel } = buttonProps;
 
@@ -397,13 +445,22 @@ storiesOf('DayPickerRangeController', module)
       />
     </div>
   )))
-  .add('with custom month navigation', withInfo()(() => (
+  .add('with custom month navigation icons', withInfo()(() => (
     <DayPickerRangeControllerWrapper
       onOutsideClick={action('DayPickerRangeController::onOutsideClick')}
       onPrevMonthClick={action('DayPickerRangeController::onPrevMonthClick')}
       onNextMonthClick={action('DayPickerRangeController::onNextMonthClick')}
       navPrev={<TestPrevIcon />}
       navNext={<TestNextIcon />}
+    />
+  )))
+  .add('with custom month navigation buttons', withInfo()(() => (
+    <DayPickerRangeControllerWrapper
+      onOutsideClick={action('DayPickerRangeController::onOutsideClick')}
+      onPrevMonthClick={action('DayPickerRangeController::onPrevMonthClick')}
+      onNextMonthClick={action('DayPickerRangeController::onNextMonthClick')}
+      renderNavPrevButton={renderNavPrevButton}
+      renderNavNextButton={renderNavNextButton}
     />
   )))
   .add('with custom month navigation and blocked navigation (minDate and maxDate)', withInfo()(() => (
